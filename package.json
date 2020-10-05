@@ -29,7 +29,7 @@
   "scripts": {
     "analyze": "size-limit --why",
     "build": "tsdx build",
-    "lint": "tsdx lint",
+    "lint": "tsdx lint src test",
     "prepare": "tsdx build",
     "size": "size-limit",
     "start": "tsdx watch",

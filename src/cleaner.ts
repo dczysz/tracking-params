@@ -56,9 +56,9 @@ export const cleanUrl = (dirtyUrl: string) =>
 
 // Map URLSearchParams to [ key, value ][]
 const paramsToEntries = (params: URLSearchParams) => {
-  const arr: [string, string][] = [];
+  const _params: { [key: string]: string } = {};
   params.forEach((value, key) => {
-    arr.push([key, value]);
+    _params[key] = value;
   });
-  return arr;
+  return Object.entries(_params);
 };

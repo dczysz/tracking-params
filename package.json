@@ -1,0 +1,71 @@
+{
+  "name": "tracking-params",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "dczysz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dczysz/tracking-params.git"
+  },
+  "homepage": "https://github.com/dczysz/tracking-params",
+  "keywords": [
+    "parameters",
+    "query",
+    "querystring",
+    "referral",
+    "tracking",
+    "url",
+    "utm"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "analyze": "size-limit --why",
+    "build": "tsdx build",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "start": "tsdx watch",
+    "test": "tsdx test",
+    "test:coverage": "tsdx test --coverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  },
+  "module": "dist/tracking-params.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/tracking-params.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/tracking-params.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.6.0",
+    "husky": "^4.3.0",
+    "size-limit": "^4.6.0",
+    "tsdx": "^0.14.0",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.3"
+  }
+}

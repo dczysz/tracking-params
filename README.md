@@ -13,18 +13,18 @@ npm install tracking-params
 ## Usage
 
 ```js
-const tracking = require('tracking-params');
+const { cleanUrl, getTrackingData } = require('tracking-params');
 
 const url = 'https://example.com?ok=ok';
 const dirtyUrl = url + '&utm_term=term';
 
-console.log(tracking.cleanUrl(url));
+console.log(cleanUrl(url));
 // 'https://example.com?ok=ok'
 
-console.log(tracking.cleanUrl(dirtyUrl));
+console.log(cleanUrl(dirtyUrl));
 // 'https://example.com?ok=ok'
 
-console.log(tracking.getTrackingData(url));
+console.log(getTrackingData(url));
 // {
 //   url: 'https://example.com?ok=ok',
 //   isDirty: false,
@@ -32,7 +32,7 @@ console.log(tracking.getTrackingData(url));
 //   cleanUrl: 'https://example.com?ok=ok'
 // }
 
-console.log(tracking.getTrackingData(dirtyUrl));
+console.log(getTrackingData(dirtyUrl));
 // {
 //   url: 'https://example.com?ok=ok&utm_term=term',
 //   isDirty: true,

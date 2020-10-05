@@ -1,5 +1,7 @@
 # Tracking Params
 
+![Build Status](https://img.shields.io/github/workflow/status/dczysz/tracking-params/CI) ![Bundle Size](https://img.shields.io/bundlephobia/min/tracking-params)
+
 Easily get and remove unwanted tracking parameters from URLs
 
 ## Installation

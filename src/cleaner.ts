@@ -1,3 +1,4 @@
+import { paramsToEntries } from './utils';
 import { ParamInfo, DOMAIN_PARAMS } from './params';
 
 interface UrlTrackingData {
@@ -7,7 +8,7 @@ interface UrlTrackingData {
   cleanUrl: string;
 }
 
-export const getTrackingData = (dirtyUrl: string) => {
+export const getTrackingData = (dirtyUrl: string): UrlTrackingData => {
   const urlObj = new URL(dirtyUrl);
 
   const urlData: UrlTrackingData = {
@@ -60,14 +61,5 @@ export const getTrackingData = (dirtyUrl: string) => {
   return urlData;
 };
 
-export const cleanUrl = (dirtyUrl: string) =>
+export const cleanUrl = (dirtyUrl: string): string =>
   getTrackingData(dirtyUrl).cleanUrl;
-
-// Map URLSearchParams to [ key, value ][]
-const paramsToEntries = (params: URLSearchParams) => {
-  const _params: { [key: string]: string } = {};
-  params.forEach((value, key) => {
-    _params[key] = value;
-  });
-  return Object.entries(_params);
-};

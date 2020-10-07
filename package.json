@@ -1,6 +1,6 @@
 {
   "name": "tracking-params",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "author": "dczysz",
   "repository": {
@@ -33,8 +33,7 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "start": "tsdx watch",
-    "test": "tsdx test",
-    "test:coverage": "tsdx test --coverage"
+    "test": "tsdx test"
   },
   "husky": {
     "hooks": {

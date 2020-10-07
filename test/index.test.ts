@@ -48,6 +48,19 @@ describe('getTrackingData function', () => {
     expect(trackingData.trackingParams.length).toBe(2);
     expect(trackingData.cleanUrl).toBe('https://twitter.com/test?ok=ok');
   });
+
+  it('runs domain specific handler functions if provided', () => {
+    let dirtyUrl =
+      'https://www.amazon.com/Product-Name/dp/B07GVHJ1QL/ref=pd_sbs_193_4/133-4596300-1462537?pd_rd_i=B07GVH91NQ&psc=1&refRID=XWRKTMR4MM98EW1CNEM1&ok=ok';
+
+    let trackingData = getTrackingData(dirtyUrl);
+    expect(trackingData.url).toBe(dirtyUrl);
+    expect(trackingData.isDirty).toBe(true);
+    expect(trackingData.trackingParams.length).toBe(4);
+    expect(trackingData.cleanUrl).toBe(
+      'https://www.amazon.com/Product-Name/dp/B07GVHJ1QL/?ok=ok'
+    );
+  });
 });
 
 describe('cleanUrl function', () => {

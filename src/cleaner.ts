@@ -1,9 +1,9 @@
-import { DOMAIN_PARAMS } from './params';
+import { ParamInfo, DOMAIN_PARAMS } from './params';
 
 interface UrlTrackingData {
   url: string;
   isDirty: boolean;
-  trackingParams: { key: string; value: string }[];
+  trackingParams: ParamInfo[];
   cleanUrl: string;
 }
 
@@ -45,6 +45,15 @@ export const getTrackingData = (dirtyUrl: string) => {
           }
         });
       });
+
+      // Run domain specific handler to further clean URL
+      if (typeof domainParams.handler === 'function') {
+        const moreInfo = domainParams.handler(urlObj);
+        if (moreInfo) {
+          urlData.trackingParams.push(...moreInfo.newParams);
+          urlData.cleanUrl = moreInfo.newCleanUrl;
+        }
+      }
     }
   });
 

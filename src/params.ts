@@ -1,3 +1,5 @@
+export type ParamInfo = { key: string; value: string };
+
 const UNIVERSAL_PARAMS: (string | RegExp)[] = [
   '__twitter_impression',
   '_hsenc',
@@ -30,6 +32,8 @@ const UNIVERSAL_PARAMS: (string | RegExp)[] = [
   'mc_cid',
   'mc_eid',
   'mkt_tok',
+  /pd_rd\w+/,
+  /pf_rd\w+/,
   'referrer',
   'spJobID',
   'spMailingID',
@@ -44,9 +48,15 @@ const UNIVERSAL_PARAMS: (string | RegExp)[] = [
 ];
 
 // Domain specific block list
+interface HandlerInfo {
+  newCleanUrl: string;
+  newParams: ParamInfo[];
+}
+
 interface DomainParams {
   domain: string;
   params: (string | RegExp)[];
+  handler?: (url: URL) => HandlerInfo | void;
 }
 
 export const DOMAIN_PARAMS: DomainParams[] = [
@@ -60,14 +70,42 @@ export const DOMAIN_PARAMS: DomainParams[] = [
       '_encoding',
       'creative',
       'creativeASIN',
+      'dchild',
       'ie',
       'linkCode',
       'linkId',
-      /pd_rd\w+/,
-      /pf_rd\w+/,
+      'orig',
       'psc',
+      'qid',
+      'ref',
+      'sr',
       'tag',
     ],
+    handler: url => {
+      // Remove /ref=abc at end of url path
+      const refPathMatch = /ref=\w+/;
+      const newUrl = new URL(url.toString());
+
+      const matches = newUrl.pathname.match(refPathMatch);
+      if (!matches?.length) {
+        return;
+      }
+
+      const startIndex = newUrl.pathname.indexOf(matches[0]);
+      newUrl.pathname = newUrl.pathname.substring(0, startIndex);
+
+      const newParams: ParamInfo[] = [
+        {
+          key: 'ref',
+          value: url.pathname.substring(startIndex + 4), // After `ref=`
+        },
+      ];
+
+      return {
+        newCleanUrl: newUrl.toString(),
+        newParams: newParams,
+      };
+    },
   },
   {
     domain: 'bing',

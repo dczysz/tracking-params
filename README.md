@@ -1,6 +1,8 @@
 # Tracking Params ![Build Status](https://img.shields.io/github/workflow/status/dczysz/tracking-params/CI) ![Bundle Size](https://img.shields.io/bundlephobia/min/tracking-params)
 
-Easily get and remove unwanted tracking parameters from URLs
+Easily get and remove unwanted tracking parameters from URLs.
+
+This project was inspired by [neat-url](https://www.npmjs.com/package/neat-url), but includes more functionality by returning detailed info along with the cleaned URL.
 
 ## Installation
 

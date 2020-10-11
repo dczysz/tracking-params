@@ -38,7 +38,12 @@ export const getTrackingData = (dirtyUrl: string): UrlTrackingData => {
       urlParams.forEach(([key, value]) => {
         domainParams.params.forEach(badParam => {
           // Check for param key match
-          if (new RegExp(badParam).test(key)) {
+          const match =
+            typeof badParam === 'string'
+              ? key === badParam
+              : badParam.test(key);
+
+          if (match) {
             urlData.isDirty = true;
             urlData.trackingParams.push({ key, value });
             urlObj.searchParams.delete(key);

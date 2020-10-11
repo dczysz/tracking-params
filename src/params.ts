@@ -78,6 +78,7 @@ export const DOMAIN_PARAMS: DomainParams[] = [
       'psc',
       'qid',
       'ref',
+      'refRID',
       'sr',
       'tag',
     ],
